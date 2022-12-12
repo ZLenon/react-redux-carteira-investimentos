@@ -1,14 +1,14 @@
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers/index';
+import rootReducer from './reducers';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk)),
 );
 
-if (window.Cypress) {
+if (window.cypress) {
   window.store = store;
 }
 export default store;

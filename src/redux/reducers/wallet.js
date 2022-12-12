@@ -1,4 +1,4 @@
-import { ACTION_WALLET } from '../actions/index';
+import { ACTION_WALLET } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
