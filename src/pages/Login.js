@@ -27,7 +27,7 @@ class Login extends React.Component {
     /* validação senha maior que seis */
     const SIX = 6;
     const passwordOK = password.length >= SIX;
-    /* chamei ambos no estado de validação do botão */
+    /* chamei ambos em uma const de validação do botão */
     const itsAvaliable = emailOK && passwordOK;
     return (
       <>

@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class Header extends Component {
   render() {
     return (
-      <div>Header</div>
+      <header
+        data-testid="email-field"
+      />
     );
   }
 }
