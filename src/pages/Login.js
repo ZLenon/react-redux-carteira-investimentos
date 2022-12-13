@@ -73,6 +73,7 @@ Login.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   history: PropTypes.func,
+  dispatch: PropTypes.func,
 }.isRequired;
 
 /* const mapStateToProps = (state) => ({
