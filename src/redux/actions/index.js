@@ -3,7 +3,7 @@ export const ACTION_WALLET = 'ACTION_WALLET';
 
 export const actionUser = (userInfo) => ({
   type: ACTION_USER,
-  payload: { ...userInfo },
+  payload: userInfo,
 });
 
 export const actionWallet = (walletInfo) => ({

@@ -7,6 +7,9 @@ class Wallet extends React.Component {
       <>
         <h1>Wallet</h1>
         <Header />
+        <input
+          data-testid="value-input"
+        />
       </>
     );
   }

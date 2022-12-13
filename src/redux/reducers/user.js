@@ -2,7 +2,6 @@ import { ACTION_USER } from '../actions';
 
 const INITIAL_STATE = {
   email: '',
-  password: '',
 };
 
 const user = (state = INITIAL_STATE, action) => {
@@ -10,7 +9,7 @@ const user = (state = INITIAL_STATE, action) => {
   case ACTION_USER:
     return {
       ...state,
-      ...action.payload,
+      email: action.payload,
     };
   default: return state;
   }

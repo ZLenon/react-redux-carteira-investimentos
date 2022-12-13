@@ -17,8 +17,9 @@ class Login extends React.Component {
   };
 
   handleClick = () => {
+    const { email } = this.state;
     const { history, dispatch } = this.props;
-    dispatch(actionUser(this.state));
+    dispatch(actionUser(email));
     history.push('/carteira');
   };
 
@@ -57,7 +58,7 @@ class Login extends React.Component {
           onChange={ this.handleChange }
         />
         <button
-          id="btn"
+          id="buttonEntrar"
           type="button"
           onClick={ this.handleClick }
           disabled={ !itsAvaliable }
@@ -75,10 +76,5 @@ Login.propTypes = {
   history: PropTypes.func,
   dispatch: PropTypes.func,
 }.isRequired;
-
-/* const mapStateToProps = (state) => ({
-  email: state.user.email,
-  password: state.user.password,
-}); */
 
 export default connect()(Login);
