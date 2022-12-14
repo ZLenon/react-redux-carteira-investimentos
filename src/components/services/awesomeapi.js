@@ -1,7 +1,7 @@
 const awesomeapi = async () => {
   const url = 'https://economia.awesomeapi.com.br/json/all';
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => data);
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 };
 export default awesomeapi;
