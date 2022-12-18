@@ -14,11 +14,11 @@ export const actionWalletCurrencies = (walletInfo) => ({
   payload: walletInfo,
 });
 
-export const fetchApiCurrencies = () => async (dispatch) => {
-  const data = await awesomeapi();
-  delete data.USDT;
-  const coinsKeys = Object.keys(data);
-  dispatch(actionWalletCurrencies(coinsKeys));
+export const fetchApiCurrencies = () => async (dispatch) => { // duas arrow para funcionar
+  const data = await awesomeapi(); // api
+  delete data.USDT; // delete removeu a chave USDT do retorno da api
+  const coinsKeys = Object.keys(data); // objectKey pega so as chaves
+  dispatch(actionWalletCurrencies(coinsKeys));// atraves do dispatch mandei para action da linha 12
 };
 
 export const actionWalletExpenses = (expenses) => ({
