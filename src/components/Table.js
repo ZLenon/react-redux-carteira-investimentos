@@ -1,37 +1,62 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Table extends Component {
   render() {
+    const { expenses } = this.props;
+    const validation = expenses.length > 0;
     return (
       <>
-        <h3>Table</h3>
+        <h3>Dispesas</h3>
         <table>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-          </tr>
+          { validation ? (
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Tag</th>
+                <th>Método de pagamento</th>
+                <th>Valor</th>
+                <th>Moeda</th>
+                <th>Câmbio utilizado</th>
+                <th>Valor convertido</th>
+                <th>Moeda de conversão</th>
+                <th>Editar/Excluir</th>
+              </tr>
+            </thead>
+          ) : <p>Ainda Nenhuma Dispesa adicionada</p>}
+          {
+            expenses.map((info) => (
+              <tbody key={ info.id }>
+                <tr>
+                  <td>{info.description}</td>
+                  <td>{info.tag}</td>
+                  <td>{info.method}</td>
+                  <td>{(info.value * 1).toFixed(2)}</td>
+                  <td>{info.exchangeRates[info.currency].name}</td>
+                  <td>{(info.exchangeRates[info.currency].ask * 1).toFixed(2)}</td>
+                  <td>
+                    {(info.value * info.exchangeRates[info.currency].ask)
+                      .toFixed(2)}
+                  </td>
+                  <td>Reais</td>
+                </tr>
+              </tbody>
+            ))
+          }
         </table>
       </>
     );
   }
 }
+Table.propTypes = {
+  expenses: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
+};
 
-export default Table;
+const mapStateToProps = (state) => ({
+  expenses: state.wallet.expenses,
+});
+
+export default connect(mapStateToProps)(Table);
