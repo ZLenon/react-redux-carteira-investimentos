@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { actionWalletDelete, actionWalletEdit } from '../redux/actions';
 
 class Table extends Component {
+  handleEdit = (id) => {
+    const { dispatch } = this.props;
+    dispatch(actionWalletEdit(id));
+  };
+
+  handleDel = (id) => {
+    const { dispatch, allInfos } = this.props;
+    dispatch(actionWalletDelete(id, allInfos));
+  };
+
   render() {
-    const { expenses } = this.props;
-    const validation = expenses.length > 0;
+    const { allInfos } = this.props;
+    const validation = allInfos.length > 0;
     return (
       <>
         <h3>Dispesas</h3>
@@ -26,7 +37,7 @@ class Table extends Component {
             </thead>
           ) : <p>Ainda Nenhuma Dispesa adicionada</p>}
           {
-            expenses.map((info) => (
+            allInfos.map((info) => (
               <tbody key={ info.id }>
                 <tr>
                   <td>{info.description}</td>
@@ -39,7 +50,24 @@ class Table extends Component {
                     {(info.value * info.exchangeRates[info.currency].ask)
                       .toFixed(2)}
                   </td>
-                  <td>Reais</td>
+                  <td>
+                    <button
+                      data-testid="edit-btn"
+                      type="button"
+                      onClick={ () => this.handleEdit(info.id) }
+                    >
+                      Editar dispesas
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      data-testid="delete-btn"
+                      type="button"
+                      onClick={ () => this.handleDel(info.id) }
+                    >
+                      Excluir
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             ))
@@ -50,13 +78,14 @@ class Table extends Component {
   }
 }
 Table.propTypes = {
-  expenses: PropTypes.arrayOf(
+  allInfos: PropTypes.arrayOf(
     PropTypes.string,
-  ).isRequired,
-};
+  ),
+  dispatch: PropTypes.func,
+}.isRequired;
 
 const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
+  allInfos: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Table);

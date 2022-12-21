@@ -3,6 +3,8 @@ import awesomeapi from '../../components/services/awesomeapi';
 export const ACTION_USER = 'ACTION_USER';
 export const ACTION_WALLET_CURRENCIES = 'ACTION_WALLET_CURRENCIES';
 export const ACTION_WALLET_EXPENSES = 'ACTION_WALLET_EXPENSES';
+export const ACTION_WALLET_DELETE = 'ACTION_WALLET_DELETE';
+export const ACTION_WALLET_EDIT = 'ACTION_WALLET_EDIT';
 
 export const actionUser = (userInfo) => ({
   type: ACTION_USER,
@@ -33,3 +35,13 @@ export function fetchApi() {
     return data;
   };
 }
+
+export const actionWalletDelete = (id, infoAll) => ({
+  type: ACTION_WALLET_DELETE,
+  payload: infoAll.filter((expenses) => expenses.id !== id),
+});
+
+export const actionWalletEdit = (id) => ({
+  type: ACTION_WALLET_EDIT,
+  payload: id,
+});
