@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionWalletDelete, actionWalletEdit } from '../redux/actions';
+import { actionWalletDelete /* actionWalletEdit */ } from '../redux/actions';
 
 class Table extends Component {
-  handleEdit = (id) => {
+/*   handleEdit = (id) => {
     const { dispatch } = this.props;
     dispatch(actionWalletEdit(id));
-  };
+  }; */
 
   handleDel = (id) => {
     const { dispatch, allInfos } = this.props;
@@ -21,22 +21,21 @@ class Table extends Component {
       <>
         <h3>Dispesas</h3>
         <table>
-          { validation ? (
-            <thead>
-              <tr>
-                <th>Descrição</th>
-                <th>Tag</th>
-                <th>Método de pagamento</th>
-                <th>Valor</th>
-                <th>Moeda</th>
-                <th>Câmbio utilizado</th>
-                <th>Valor convertido</th>
-                <th>Moeda de conversão</th>
-                <th>Editar/Excluir</th>
-              </tr>
-            </thead>
-          ) : <p>Ainda Nenhuma Dispesa adicionada</p>}
-          {
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+          </thead>
+
+          { !validation ? <p>Ainda Nenhuma Dispesa adicionada</p> : (
             allInfos.map((info) => (
               <tbody key={ info.id }>
                 <tr>
@@ -54,7 +53,7 @@ class Table extends Component {
                     <button
                       data-testid="edit-btn"
                       type="button"
-                      onClick={ () => this.handleEdit(info.id) }
+                      /* onClick={ () => this.handleEdit(info.id) } */
                     >
                       Editar dispesas
                     </button>
@@ -70,8 +69,7 @@ class Table extends Component {
                   </td>
                 </tr>
               </tbody>
-            ))
-          }
+            )))}
         </table>
       </>
     );
